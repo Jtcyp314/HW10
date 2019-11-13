@@ -16,23 +16,21 @@
   <script>
     function getCurrency()
     {
-      endpoint = 'latest'
-      access_key = '023ce61dde354ed0f026d8f6747dda84';
+
 
       request = new XMLHttpRequest();
  
-      request.open("GET", 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key, true);
+      request.open("GET", "https://api.coindesk.com/v1/bpi/currentprice/CNY.json", true);
 
       request.onreadystatechange = function() {
  
         if (request.readyState == 4 && request.status == 200) {
 
           result = request.responseText;
-          //(result)
-          weather = JSON.parse(result);
+          currency = JSON.parse(result);
           
 
-          document.getElementById("data").innerHTML ="Currencies against the EUR: " + result;
+          document.getElementById("data").innerHTML ="USD to Bitcoin: " + currency.bpi.USD.rate;
 
           
         }
@@ -46,14 +44,9 @@
   </script>
 
 
-  <p>WARNING: if running in chrome and the data isn't showing up due to a mixed content error, go the shield in the far right of the search bar,</br>
-and click load unsafe script. I can't get the https api without paying for it and I like this concept a lot so I don't want to have to go out and find a new one.</br></p>
-  <p>The above is from the fixer.io api and displays many global currencies against the euro.</p>
-  <p> This API can do currency conversion, but that would require a paid account.</br>
-  With the free account I can only display the values against the euro, so that is what I have given here today.</p>
-  <p>I found it from <a href = "https://fixer.io/documentation">https://fixer.io/</a></p>
-  <p>The options that I used were the same ones that we went over in class. I used GET because I was asking for a certain resource,</br> the URL is the URL that as given in the documentation for the API, and true at the end means that it is going to access the data async. so that the rest of the page can load.</p>
-  <p>USAGE:</br>1. This could be very useful for a travel company or hotel that wants to see how much
-  something will cost in a customers' native currency.</br>2.This could be used by smaller banks for currency exchange services, as they aren't
-  the ones that drive the FOREX market but still need to be competitive with their selling of currency.</p>
+
+  <p>The above is from the coindesk api and displays bitcoin in any currency.</p>
+  <p>I found it from <a href = "https://www.coindesk.com/api">https://www.coindesk.com/api</a></p>
+  <p>The options that I used were the same ones that we went over in class. I used GET because I was asking for a certain resource,</br> the URL is the URL that as given in the documentation for the API, and true at the end means that it is going to access the data async so that the rest of the page can load.</p>
+  <p>USAGE:</br>1. This could be very useful for a travel company or hotel that wants to do coinversions into bitcoin so that payments can be anonymous</br>2.This could be used by smaller banks for currency exchange services as they try to break into the crypto market and want to show online customers current value.</p>
 </html>
